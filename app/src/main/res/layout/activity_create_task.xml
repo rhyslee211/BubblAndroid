@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id = "@+id/tasksText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle = "bold"
+        android:text = "Create New Task"
+        android:textColor="@android:color/black"
+        android:textSize = "32sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop = "16dp"/>
+
+
+    <EditText
+        android:id = "@+id/editName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize = "20sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop = "64dp"
+        android:inputType = "textAutoComplete"
+        android:hint="Task Name"
+        />
+
+    <EditText
+        android:id = "@+id/editDate"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize = "20sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop = "96dp"
+        android:inputType = "datetime"
+        android:hint = "Task Date"
+        />
+
+
+    <EditText
+        android:id = "@+id/editLocation"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize = "20sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop = "128dp"
+        android:inputType = "textAutoComplete"
+        android:hint="Task Location"
+        />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="760dp"
+        android:backgroundTint="#7ea8ed"
+        android:textColor="@color/white"
+        android:text="Create Task"
+        />
+
+
+</RelativeLayout>

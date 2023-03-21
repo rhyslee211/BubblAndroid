@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -18,13 +18,29 @@
         android:layout_marginBottom="16dp"
         android:layout_marginTop = "16dp"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/floatingActionButton"
+
+    <ImageButton
+        android:id="@+id/addbutton"
+        android:contentDescription="Newbutton to create a new task"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:layout_marginTop="800dp"
-        android:layout_marginStart="210dp"
-        app:srcCompat="@android:drawable/ic_input_add" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="760dp"
+        android:backgroundTint="#7ea8ed"
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:padding="20dp"
+        android:src="@android:drawable/ic_input_add"
+        app:tint="#0000FF" />
+
+    <TextView
+        android:id = "@+id/taskText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle = "bold"
+        android:textColor="@android:color/black"
+        android:textSize = "32sp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop = "48dp"/>
+
+</RelativeLayout>

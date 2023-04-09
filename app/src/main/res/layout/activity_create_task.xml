@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="760dp"
+        android:layout_marginTop="650dp"
         android:backgroundTint="#7ea8ed"
         android:textColor="@color/white"
         android:text="Create Task"

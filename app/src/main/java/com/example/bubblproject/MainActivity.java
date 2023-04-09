@@ -29,16 +29,23 @@ public class MainActivity extends AppCompatActivity {
     public ArrayList<TaskItem> TaskList = new ArrayList<TaskItem>();
     private ImageButton addbutton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);//sets layout to main
 
-        Intent intent =  getIntent();
+        Intent intent =  getIntent();//creates an Intent
 
-        String taskName = intent.getStringExtra(CreateTaskActivity.TEXT_NAME);
-        TextView textView = findViewById(R.id.taskText);
-        textView.setText(taskName);
+        TaskItem task = (TaskItem) intent.getSerializableExtra("Hello");//searches for the Create Task intent
+        TextView textView = findViewById(R.id.taskText);//finds the textview text box:
+        //TODO: Turn this textview into a list that iterates through a tasklist
+        try {
+            textView.setText(task.getName());
+        }
+        catch(NullPointerException e){//if the task is null, doesnt crash the program
+
+        }
 
         addbutton = (ImageButton) findViewById(R.id.addbutton);
         addbutton.setOnClickListener(new View.OnClickListener() {

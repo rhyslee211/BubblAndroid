@@ -17,11 +17,8 @@ public class CreateTaskActivity extends AppCompatActivity {
     private EditText locationText;
     private Button button;
 
-    private String nameToSend;
-    private String dateToSend;
-    private String locToSend;
+    private TaskItem task = new TaskItem();
 
-    public static final String TEXT_NAME = "com.example.bubblproject.TEXT_NAME";
 
 
     @Override
@@ -38,9 +35,10 @@ public class CreateTaskActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                nameToSend = nameText.getText().toString();
-                dateToSend = dateText.getText().toString();
-                locToSend = locationText.getText().toString();
+
+                task.setName(nameText.getText().toString());
+                task.setDate(dateText.getText().toString());
+                task.setLoc(locationText.getText().toString());
                 goToMainActivity();
             }
         });
@@ -48,7 +46,7 @@ public class CreateTaskActivity extends AppCompatActivity {
 
     private void goToMainActivity() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(TEXT_NAME, nameToSend);
+        intent.putExtra("Hello", task);
         startActivity(intent);
     }
 }

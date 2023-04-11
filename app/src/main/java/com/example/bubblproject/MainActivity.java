@@ -14,20 +14,26 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.bubblproject.databinding.ActivityMainBinding;
+//import com.example.bubblproject.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+//import kotlinx.coroutines.scheduling.Task;
 
-    public ArrayList<TaskItem> TaskList = new ArrayList<TaskItem>();
+public class MainActivity extends AppCompatActivity {
     private ImageButton addbutton;
+
+    private ListView myListView;
+    private ArrayAdapter TaskArrayAdapter;
 
 
     @Override
@@ -38,14 +44,20 @@ public class MainActivity extends AppCompatActivity {
         Intent intent =  getIntent();//creates an Intent
 
         TaskItem task = (TaskItem) intent.getSerializableExtra("Hello");//searches for the Create Task intent
-        TextView textView = findViewById(R.id.taskText);//finds the textview text box:
-        //TODO: Turn this textview into a list that iterates through a tasklist
+        //TextView textView = findViewById(R.id.taskText);//finds the textview text box:
         try {
-            textView.setText(task.getName());
+            if (task.getName() != null && task.getName().equals("") == false) {
+                MyTaskList.TaskList.add(task);
+            }
         }
-        catch(NullPointerException e){//if the task is null, doesnt crash the program
+        catch(NullPointerException e){}
+        //TODO: Call the sorting algorithm function here
 
-        }
+        myListView = findViewById(R.id.list_view);
+
+        TaskArrayAdapter = new ArrayAdapter(this, R.layout.mytextview, MyTaskList.TaskList);
+        myListView.setAdapter(TaskArrayAdapter);
+        myListOnClickListener();
 
         addbutton = (ImageButton) findViewById(R.id.addbutton);
         addbutton.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +67,17 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void myListOnClickListener() {
+        myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
+            @Override
+            public boolean onItemLongClick(AdapterView adapterView, View view, int i, long l){
+                MyTaskList.TaskList.remove(i);
+                TaskArrayAdapter.notifyDataSetChanged();
+                return true;
+            }
+        });
     }
 
     public void openCreateActivity(){

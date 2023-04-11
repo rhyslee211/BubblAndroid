@@ -8,23 +8,21 @@ public class TaskItem implements Serializable {
     private String TaskName;
     private String TaskDate;
     private String TaskLocation;
-    private Double TaskLength;
-    private String TaskType;
+    private int TaskPriority;
+    //TODO: Create an overall Priority variable
 
-    public TaskItem(String TaskName, String TaskDate, String TaskLocation, Double  TaskLength, String TaskType){
+    public TaskItem(String TaskName, String TaskDate, String TaskLocation, int TaskPriority){
         this.TaskName = TaskName;
         this.TaskDate = TaskDate;
         this.TaskLocation = TaskLocation;
-        this.TaskLength = TaskLength;
-        this.TaskType = TaskType;
+        this.TaskPriority = TaskPriority;
     }
 
     public TaskItem(){
         this.TaskName = null;
         this.TaskDate = null;
         this.TaskLocation = null;
-        this.TaskLength = null;
-        this.TaskType = null;
+        this.TaskPriority = 0;
     }
     public void setName(String name){
         this.TaskName = name;
@@ -35,14 +33,16 @@ public class TaskItem implements Serializable {
     public void setLoc(String loc){
         this.TaskLocation = loc;
     }
+    public void setPriority(int priority){this.TaskPriority = priority;}
     public String getName(){
         return this.TaskName;
     }
-    public String getDate(){
-        return this.TaskDate;
-    }
-    public String getLoc(){
-        return this.TaskLocation;
-    }
+    public String getDate(){ return this.TaskDate;}
+    public String getTaskLocation(){return this.TaskLocation;}
+    public int getPriority(){return this.TaskPriority;}
 
+    @Override
+    public String toString(){
+        return(this.TaskName);
+    }
 }

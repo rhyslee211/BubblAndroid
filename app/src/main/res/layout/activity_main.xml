@@ -26,9 +26,8 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="700dp"
         android:backgroundTint="#7ea8ed"
-        android:contentDescription="Newbutton to create a new task"
-
-        android:padding="20dp"
+        android:contentDescription="Button to create a new task"
+        android:padding="40dp"
         android:src="@android:drawable/ic_input_add"
         app:tint="#0000FF" />
 

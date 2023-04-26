@@ -18,6 +18,11 @@ public class TaskItem implements Serializable {
         this.TaskPriority = TaskPriority;
     }
 
+    public TaskItem(String TaskName, int TaskPriority){
+        this.TaskName = TaskName;
+        this.TaskPriority = TaskPriority;
+    }
+
     public TaskItem(){
         this.TaskName = null;
         this.TaskDate = null;

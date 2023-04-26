@@ -5,31 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/design_main"
-    android:padding="20dp"
     tools:context=".MainActivity">
 
     <ImageView
+        android:id="@+id/bubblLogo"
         android:layout_width="85dp"
         android:layout_height="85dp"
-        android:layout_marginBottom="20dp"
         android:layout_centerHorizontal="true"
-        android:src="@mipmap/ic_bubbl"
-        android:id="@+id/bubblLogo"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@mipmap/ic_bubbl" />
 
     <RelativeLayout
         android:id="@+id/taskView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/design_secondary"
-        android:layout_below="@id/bubblLogo">
+        android:layout_below="@id/bubblLogo"
+        android:background="@color/design_secondary">
 
-        <ListView
-            android:id="@+id/list_view"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@android:color/black"
-            android:textSize="32sp"
-            android:layout_centerInParent="true"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/tasksRecView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
 
     </RelativeLayout>
 
@@ -37,11 +34,11 @@
         android:id="@+id/addButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/taskView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
         android:backgroundTint="#7ea8ed"
         android:contentDescription="Button to create a new task"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@id/taskView"
-        android:layout_marginTop="20dp"
         android:src="@android:drawable/ic_input_add"
         app:tint="#0000FF" />
 

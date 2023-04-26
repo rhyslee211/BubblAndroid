@@ -13,6 +13,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 //import com.example.bubblproject.databinding.ActivityMainBinding;
 
@@ -32,7 +34,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private ImageButton addButton;
 
-    private ListView myListView;
+    private RecyclerView tasksRecView;
     private ArrayAdapter TaskArrayAdapter;
 
 
@@ -43,21 +45,32 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent =  getIntent();//creates an Intent
 
+        tasksRecView = findViewById(R.id.tasksRecView);
+
+        ArrayList<TaskItem> tasks = new ArrayList<>();
+
+        tasks.add(new TaskItem("Gym", 3));
+        tasks.add(new TaskItem("Homework", 5));
+        tasks.add(new TaskItem("Soccer Practice", 3));
+        tasks.add(new TaskItem("Sleep", 1));
+
+        /*
         TaskItem task = (TaskItem) intent.getSerializableExtra("Hello");//searches for the Create Task intent
         //TextView textView = findViewById(R.id.taskText);//finds the textview text box:
         try {
             if (task.getName() != null && task.getName().equals("") == false) {
-                MyTaskList.TaskList.add(task);
+                tasks.add(task);
             }
         }
         catch(NullPointerException e){}
         //TODO: Call the sorting algorithm function here
+        */
 
-        myListView = findViewById(R.id.list_view);
+        TasksRecViewAdapter adapter = new TasksRecViewAdapter();
+        adapter.setTasks(tasks);
 
-        TaskArrayAdapter = new ArrayAdapter(this, R.layout.mytextview, MyTaskList.TaskList);
-        myListView.setAdapter(TaskArrayAdapter);
-        myListOnClickListener();
+        tasksRecView.setAdapter(adapter);
+        tasksRecView.setLayoutManager(new LinearLayoutManager(this));
 
         ImageButton addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -67,17 +80,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-    }
-
-    private void myListOnClickListener() {
-        myListView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener(){
-            @Override
-            public boolean onItemLongClick(AdapterView adapterView, View view, int i, long l){
-                MyTaskList.TaskList.remove(i);
-                TaskArrayAdapter.notifyDataSetChanged();
-                return true;
-            }
-        });
     }
 
     public void openCreateActivity(){

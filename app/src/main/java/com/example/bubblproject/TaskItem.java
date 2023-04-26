@@ -6,12 +6,12 @@ import java.util.*;
 public class TaskItem implements Serializable {
 
     private String TaskName;
-    private String TaskDate;
+    private Date TaskDate;
     private String TaskLocation;
     private int TaskPriority;
     //TODO: Create an overall Priority variable
 
-    public TaskItem(String TaskName, String TaskDate, String TaskLocation, int TaskPriority){
+    public TaskItem(String TaskName, Date TaskDate,  String TaskLocation, int TaskPriority){
         this.TaskName = TaskName;
         this.TaskDate = TaskDate;
         this.TaskLocation = TaskLocation;
@@ -27,7 +27,7 @@ public class TaskItem implements Serializable {
     public void setName(String name){
         this.TaskName = name;
     }
-    public void setDate(String date){
+    public void setDate(Date date){
         this.TaskDate = date;
     }
     public void setLoc(String loc){
@@ -37,7 +37,7 @@ public class TaskItem implements Serializable {
     public String getName(){
         return this.TaskName;
     }
-    public String getDate(){ return this.TaskDate;}
+    public Date getDate(){ return this.TaskDate;}
     public String getTaskLocation(){return this.TaskLocation;}
     public int getPriority(){return this.TaskPriority;}
 

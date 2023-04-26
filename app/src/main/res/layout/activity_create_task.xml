@@ -33,19 +33,26 @@
         android:autofillHints="name"
         />
 
-    <EditText
-        android:id = "@+id/editDate"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize = "20sp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop = "96dp"
-        android:inputType = "datetime"
-        android:hint = "Task Date"
-        />
 
+    <Button
+        android:id = "@+id/timeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="#2ea8ed"
+        android:onClick="showTimePickerDialog"
+        android:text="Select Time" />
+
+    <Button
+        android:id = "@+id/dateButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="100dp"
+        android:backgroundTint="#2ea8ed"
+        android:onClick="showDatePickerDialog"
+        android:text="Select Date" />
 
     <EditText
         android:id = "@+id/editLocation"
@@ -55,7 +62,8 @@
         android:textSize = "20sp"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop = "128dp"
+        android:layout_marginTop = "138dp"
+        android:layout_marginEnd="16dp"
         android:inputType = "textAutoComplete"
         android:hint="Task Location"
         android:autofillHints="postalAddress"
@@ -68,8 +76,9 @@
         android:textColor="@android:color/black"
         android:textSize = "20sp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop = "160dp"
+        android:layout_marginTop = "170dp"
         android:inputType = "textAutoComplete"
         android:hint="Task Priority"
         />

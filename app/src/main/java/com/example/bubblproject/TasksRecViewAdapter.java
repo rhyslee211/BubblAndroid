@@ -3,6 +3,7 @@ package com.example.bubblproject;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -29,7 +30,7 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.taskName.setText(tasks.get(position).getName());
-        holder.taskPriority.setText(String.valueOf(tasks.get(position).getPriority()));
+        holder.priorityBar.setProgress(tasks.get(position).getPriority());
     }
 
     @Override
@@ -43,12 +44,13 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView taskName, taskPriority;
+        private TextView taskName;
+        private ProgressBar priorityBar;
         private CardView parent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             taskName = itemView.findViewById(R.id.taskName);
-            taskPriority = itemView.findViewById(R.id.taskPriority);
+            priorityBar = itemView.findViewById(R.id.priorityBar);
             parent = itemView.findViewById(R.id.parent);
         }
     }

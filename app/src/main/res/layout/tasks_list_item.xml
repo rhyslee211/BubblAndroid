@@ -3,32 +3,42 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parent"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
-    android:padding="10dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="10dp">
+    android:layout_height="100dp"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="8dp"
+    app:cardMaxElevation="10dp"
+    app:cardPreventCornerOverlap="true"
+    app:cardUseCompatPadding="true"
+    android:backgroundTint="#BCCCDC">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <TextView
             android:id="@+id/taskName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:text="Task Name"
-            android:textStyle="bold" />
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="15dp"/>
 
-        <TextView
-            android:id="@+id/taskPriority"
-            android:layout_width="wrap_content"
+        <ProgressBar
+            android:id="@+id/priorityBar"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_marginEnd="10dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/taskName"
-            android:layout_marginTop="7dp"
-            android:text="Task Priority"
-            android:textStyle="bold" />
+            android:layout_below="@id/taskName"
+            android:progressDrawable="@drawable/custom_progress_bg"
+            android:max="5" />
 
     </RelativeLayout>
 

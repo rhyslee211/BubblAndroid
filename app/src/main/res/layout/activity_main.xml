@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/design_main"
+    android:background="#FF627D98"
     tools:context=".MainActivity">
 
     <ImageView
@@ -21,25 +21,26 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/bubblLogo"
-        android:background="@color/design_secondary">
+        android:background="#FF334E68">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksRecView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:srcCompat="@android:drawable/ic_input_add"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="#FF627D98"
+            app:backgroundTint="@color/black"
+            app:borderWidth="2dp" />
     </RelativeLayout>
-
-    <ImageButton
-        android:id="@+id/addButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/taskView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:backgroundTint="#7ea8ed"
-        android:contentDescription="Button to create a new task"
-        android:src="@android:drawable/ic_input_add"
-        app:tint="#0000FF" />
 
 </RelativeLayout>

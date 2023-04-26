@@ -30,7 +30,7 @@ import java.util.ArrayList;
 //import kotlinx.coroutines.scheduling.Task;
 
 public class MainActivity extends AppCompatActivity {
-    private ImageButton addbutton;
+    private ImageButton addButton;
 
     private ListView myListView;
     private ArrayAdapter TaskArrayAdapter;
@@ -59,8 +59,8 @@ public class MainActivity extends AppCompatActivity {
         myListView.setAdapter(TaskArrayAdapter);
         myListOnClickListener();
 
-        addbutton = (ImageButton) findViewById(R.id.addbutton);
-        addbutton.setOnClickListener(new View.OnClickListener() {
+        ImageButton addButton = findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openCreateActivity();

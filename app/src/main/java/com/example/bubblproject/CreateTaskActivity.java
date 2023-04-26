@@ -16,7 +16,6 @@ public class CreateTaskActivity extends AppCompatActivity {
     private EditText nameText;
     private EditText dateText;
     private EditText locationText;
-
     private EditText priorityText;
     private Button button;
 

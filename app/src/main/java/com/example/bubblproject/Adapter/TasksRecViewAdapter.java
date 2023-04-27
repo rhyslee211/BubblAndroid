@@ -1,4 +1,4 @@
-package com.example.bubblproject;
+package com.example.bubblproject.Adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,13 +8,12 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.transition.AutoTransition;
-import androidx.transition.TransitionManager;
+
+import com.example.bubblproject.R;
+import com.example.bubblproject.Task.TaskItem;
 
 import java.util.ArrayList;
 
@@ -70,6 +69,15 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
             locationText = itemView.findViewById(R.id.locationText);
             taskItem = itemView.findViewById(R.id.taskItem);
             expandableLayout = itemView.findViewById(R.id.expandableContent);
+            taskItem.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    tasks.remove(getAdapterPosition());
+                    notifyDataSetChanged();
+                    return true;
+                }
+
+            });
 
             taskItem.setOnClickListener(new View.OnClickListener() {
                 @Override

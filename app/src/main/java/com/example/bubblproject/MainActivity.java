@@ -1,33 +1,24 @@
 package com.example.bubblproject;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.bubblproject.Adapter.TasksRecViewAdapter;
+import com.example.bubblproject.Task.TaskItem;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.util.DisplayMetrics;
 import android.view.View;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 //import com.example.bubblproject.databinding.ActivityMainBinding;
 
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
+import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,6 +29,8 @@ import java.util.Comparator;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView tasksRecView;
     private FloatingActionButton addTask;
+
+    public static ArrayList<TaskItem> tasks = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,14 +47,6 @@ public class MainActivity extends AppCompatActivity {
                 openCreateActivity();
             }
         });
-
-        ArrayList<TaskItem> tasks = new ArrayList<>();
-
-        tasks.add(new TaskItem("Gym", 3, "Planet Fitness"));
-        tasks.add(new TaskItem("Homework", 5, "Stevens"));
-        tasks.add(new TaskItem("Soccer Practice", 3, "Stevens"));
-        tasks.add(new TaskItem("Sleep", 1, "Bed"));
-
 
         TaskItem task = (TaskItem) intent.getSerializableExtra("Hello");//searches for the Create Task intent
         //TextView textView = findViewById(R.id.taskText);//finds the textview text box:
@@ -86,17 +71,6 @@ public class MainActivity extends AppCompatActivity {
         TasksRecViewAdapter adapter = new TasksRecViewAdapter(tasks, getApplicationContext());
         adapter.setTasks(tasks);
         tasksRecView.setAdapter(adapter);
-
-
-        /*
-        addButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                openCreateActivity();
-            }
-        });
-         */
-
     }
 
     public void openCreateActivity() {

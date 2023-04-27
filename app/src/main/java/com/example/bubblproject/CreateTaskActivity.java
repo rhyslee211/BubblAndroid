@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TimePicker;
+
+import com.example.bubblproject.Task.TaskItem;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -29,8 +32,8 @@ public class CreateTaskActivity extends AppCompatActivity {
 
     private Button LocationButton;
 
-    private static TaskItem task = new TaskItem();
 
+    private TaskItem task = new TaskItem();
     private static Date taskDate = new Date();
 
 
@@ -76,6 +79,8 @@ public class CreateTaskActivity extends AppCompatActivity {
                 if(task.getTaskName() == null || task.getTaskName().equals("")) {
                     goToMainActivity();
                 }
+
+                priorityText.setText("");
                 goToMainActivityWithTask();
             }
         });

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/parent"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
+    android:layout_height="wrap_content"
     android:layout_margin="5dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="8dp"
@@ -12,9 +12,11 @@
     app:cardUseCompatPadding="true"
     android:backgroundTint="#BCCCDC">
 
-    <RelativeLayout
+    <LinearLayout
+        android:id="@+id/taskItem"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:id="@+id/taskName"
@@ -35,11 +37,31 @@
             android:layout_marginEnd="10dp"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:layout_height="wrap_content"
             android:layout_below="@id/taskName"
             android:progressDrawable="@drawable/custom_progress_bg"
             android:max="5" />
 
-    </RelativeLayout>
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/expandableContent"
+            android:layout_below="@id/priorityBar">
+
+            <TextView
+                android:id="@+id/locationText"
+                android:layout_marginStart="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Location"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="15dp"
+                android:textSize="18sp"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
+
+    </LinearLayout>
 
 </androidx.cardview.widget.CardView>

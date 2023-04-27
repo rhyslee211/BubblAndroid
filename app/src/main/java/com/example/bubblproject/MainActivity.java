@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -56,16 +57,16 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<TaskItem> tasks = new ArrayList<>();
 
-        tasks.add(new TaskItem("Gym", 3));
-        tasks.add(new TaskItem("Homework", 5));
-        tasks.add(new TaskItem("Soccer Practice", 3));
-        tasks.add(new TaskItem("Sleep", 1));
+        tasks.add(new TaskItem("Gym", 3, "Planet Fitness"));
+        tasks.add(new TaskItem("Homework", 5, "Stevens"));
+        tasks.add(new TaskItem("Soccer Practice", 3, "Stevens"));
+        tasks.add(new TaskItem("Sleep", 1, "Bed"));
 
 
         TaskItem task = (TaskItem) intent.getSerializableExtra("Hello");//searches for the Create Task intent
         //TextView textView = findViewById(R.id.taskText);//finds the textview text box:
         try {
-            if (task.getName() != null && task.getName().equals("") == false) {
+            if (task.getTaskName() != null && task.getTaskName().equals("") == false) {
                 tasks.add(task);
             }
         } catch (NullPointerException e) {
@@ -75,16 +76,17 @@ public class MainActivity extends AppCompatActivity {
         Collections.sort(tasks, new Comparator<TaskItem>() {
             @Override
             public int compare(TaskItem o1, TaskItem o2) {
-                return Integer.valueOf(o1.getPriority()).compareTo(Integer.valueOf(o2.getPriority()));
+                return Integer.valueOf(o1.getTaskPriority()).compareTo(Integer.valueOf(o2.getTaskPriority()));
             }
         });
 
         Collections.reverse(tasks);
 
-        TasksRecViewAdapter adapter = new TasksRecViewAdapter();
+
+        TasksRecViewAdapter adapter = new TasksRecViewAdapter(tasks, getApplicationContext());
         adapter.setTasks(tasks);
         tasksRecView.setAdapter(adapter);
-        tasksRecView.setLayoutManager(new LinearLayoutManager(this));
+
 
         /*
         addButton.setOnClickListener(new View.OnClickListener() {

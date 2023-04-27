@@ -47,21 +47,21 @@ public class CreateTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
 
-                task.setDate(taskDate);
+                task.setTaskDate(taskDate);
 
                 if(nameText.getText().toString() != "") {
-                    task.setName(nameText.getText().toString());
+                    task.setTaskName(nameText.getText().toString());
                 }
                 if(locationText.getText().toString() != "") {
-                    task.setLoc(locationText.getText().toString());
+                    task.setTaskLocation(locationText.getText().toString());
                 }
                 if(priorityText.getText().toString() != "") {
                     try {
-                        task.setPriority(Integer.parseInt(priorityText.getText().toString()));
+                        task.setTaskPriority(Integer.parseInt(priorityText.getText().toString()));
                     }
                     catch (NumberFormatException e){}
                 }
-                if(task.getName() == null || task.getName().equals("")) {
+                if(task.getTaskName() == null || task.getTaskName().equals("")) {
                     goToMainActivity();
                 }
                 goToMainActivityWithTask();

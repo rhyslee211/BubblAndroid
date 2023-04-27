@@ -9,6 +9,8 @@ public class TaskItem implements Serializable {
     private Date TaskDate;
     private String TaskLocation;
     private int TaskPriority;
+
+    private boolean isVisible;
     //TODO: Create an overall Priority variable
 
     public TaskItem(String TaskName, Date TaskDate,  String TaskLocation, int TaskPriority){
@@ -16,11 +18,14 @@ public class TaskItem implements Serializable {
         this.TaskDate = TaskDate;
         this.TaskLocation = TaskLocation;
         this.TaskPriority = TaskPriority;
+        this.isVisible = false;
     }
 
-    public TaskItem(String TaskName, int TaskPriority){
+    public TaskItem(String TaskName, int TaskPriority, String Location){
         this.TaskName = TaskName;
         this.TaskPriority = TaskPriority;
+        this.TaskLocation = Location;
+        this.isVisible = false;
     }
 
     public TaskItem(){
@@ -28,23 +33,47 @@ public class TaskItem implements Serializable {
         this.TaskDate = null;
         this.TaskLocation = null;
         this.TaskPriority = 0;
+        this.isVisible = false;
     }
-    public void setName(String name){
-        this.TaskName = name;
+    public String getTaskName() {
+        return TaskName;
     }
-    public void setDate(Date date){
-        this.TaskDate = date;
+
+    public void setTaskName(String taskName) {
+        TaskName = taskName;
     }
-    public void setLoc(String loc){
-        this.TaskLocation = loc;
+
+    public Date getTaskDate() {
+        return TaskDate;
     }
-    public void setPriority(int priority){this.TaskPriority = priority;}
-    public String getName(){
-        return this.TaskName;
+
+    public void setTaskDate(Date taskDate) {
+        TaskDate = taskDate;
     }
-    public Date getDate(){ return this.TaskDate;}
-    public String getTaskLocation(){return this.TaskLocation;}
-    public int getPriority(){return this.TaskPriority;}
+
+    public String getTaskLocation() {
+        return TaskLocation;
+    }
+
+    public void setTaskLocation(String taskLocation) {
+        TaskLocation = taskLocation;
+    }
+
+    public int getTaskPriority() {
+        return TaskPriority;
+    }
+
+    public void setTaskPriority(int taskPriority) {
+        TaskPriority = taskPriority;
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+
+    public void setVisible(boolean visible) {
+        isVisible = visible;
+    }
 
     @Override
     public String toString(){

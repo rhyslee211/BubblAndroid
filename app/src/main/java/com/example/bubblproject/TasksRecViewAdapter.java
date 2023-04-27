@@ -1,22 +1,31 @@
 package com.example.bubblproject;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.transition.AutoTransition;
+import androidx.transition.TransitionManager;
 
 import java.util.ArrayList;
 
 public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapter.ViewHolder> {
 
     private ArrayList<TaskItem> tasks = new ArrayList<>();
+    private Context context;
 
-    public TasksRecViewAdapter() {
+    public TasksRecViewAdapter(ArrayList<TaskItem> tasks, Context context) {
+        this.tasks = tasks;
+        this.context = context;
     }
 
     @NonNull
@@ -29,8 +38,14 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.taskName.setText(tasks.get(position).getName());
-        holder.priorityBar.setProgress(tasks.get(position).getPriority());
+        TaskItem task = tasks.get(position);
+
+        holder.taskName.setText(task.getTaskName());
+        holder.priorityBar.setProgress(task.getTaskPriority());
+        holder.locationText.setText("Location: " + task.getTaskLocation());
+
+        boolean isVisible = tasks.get(position).isVisible();
+        holder.expandableLayout.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -44,14 +59,32 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        private TextView taskName;
+        private TextView taskName, locationText;
         private ProgressBar priorityBar;
-        private CardView parent;
+        private LinearLayout taskItem;
+        private RelativeLayout expandableLayout;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             taskName = itemView.findViewById(R.id.taskName);
             priorityBar = itemView.findViewById(R.id.priorityBar);
-            parent = itemView.findViewById(R.id.parent);
+            locationText = itemView.findViewById(R.id.locationText);
+            taskItem = itemView.findViewById(R.id.taskItem);
+            expandableLayout = itemView.findViewById(R.id.expandableContent);
+
+            taskItem.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    TaskItem task = tasks.get(getAdapterPosition());
+                    if(task.isVisible() == false) {
+                        for (TaskItem temp : tasks) {
+                            temp.setVisible(false);
+                        }
+                    }
+
+                    task.setVisible(!task.isVisible());
+                    notifyDataSetChanged();
+                }
+            });
         }
     }
 }

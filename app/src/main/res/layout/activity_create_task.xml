@@ -41,7 +41,7 @@
         android:layout_marginStart="200dp"
         android:layout_marginTop="100dp"
         android:backgroundTint="#2ea8ed"
-        android:onClick="showTimePickerDialog"
+        android:onClick="popTimePicker"
         android:text="Select Time" />
 
     <Button
@@ -61,23 +61,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="100dp"
         android:backgroundTint="#2ea8ed"
-        android:onClick="showDatePickerDialog"
+        android:onClick="popDatePicker"
         android:text="Select Date" />
-
-    <EditText
-        android:id = "@+id/editLocation"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize = "20sp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop = "138dp"
-        android:layout_marginEnd="16dp"
-        android:inputType = "textAutoComplete"
-        android:hint="Task Location"
-        android:autofillHints="postalAddress"
-        />
 
     <EditText
         android:id = "@+id/editPriority"
@@ -88,7 +73,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:layout_marginTop = "170dp"
+        android:layout_marginTop = "140dp"
         android:inputType = "textAutoComplete"
         android:hint="Task Priority"
         />

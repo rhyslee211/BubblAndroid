@@ -6,6 +6,7 @@ import android.os.Bundle;
 
 import com.example.bubblproject.Adapter.TasksRecViewAdapter;
 import com.example.bubblproject.Task.TaskItem;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import androidx.appcompat.app.AlertDialog;
@@ -29,6 +30,8 @@ import java.util.Comparator;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView tasksRecView;
     private FloatingActionButton addTask;
+
+    public static LatLng CanavanArena = new LatLng(40.74457, -74.02575);
 
     public static ArrayList<TaskItem> tasks = new ArrayList<>();
 
@@ -61,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         Collections.sort(tasks, new Comparator<TaskItem>() {
             @Override
             public int compare(TaskItem o1, TaskItem o2) {
-                return Integer.valueOf(o1.getTaskPriority()).compareTo(Integer.valueOf(o2.getTaskPriority()));
+                return Double.compare(o1.getOverallPriority(), o2.getOverallPriority());
             }
         });
 

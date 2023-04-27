@@ -5,6 +5,7 @@ import androidx.fragment.app.DialogFragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.location.Address;
 import android.location.Location;
 import android.text.format.DateFormat;
 import android.app.Dialog;
@@ -18,7 +19,10 @@ import android.widget.EditText;
 import android.widget.TimePicker;
 
 import com.example.bubblproject.Task.TaskItem;
+import com.google.android.gms.maps.model.LatLng;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Logger;
@@ -26,15 +30,16 @@ import java.util.logging.Logger;
 public class CreateTaskActivity extends AppCompatActivity {
 
     private EditText nameText;
-    private EditText locationText;
     private EditText priorityText;
     private Button createTaskButton;
 
     private Button LocationButton;
 
+    int hour, minutes, month, day, year;
+
 
     private TaskItem task = new TaskItem();
-    private static Date taskDate = new Date();
+    private Date taskDate = new Date();
 
 
 
@@ -47,9 +52,9 @@ public class CreateTaskActivity extends AppCompatActivity {
         LocationButton = (Button) findViewById(R.id.LocationButton);
 
         nameText = findViewById(R.id.editName);
-        locationText = findViewById(R.id.editLocation);
         priorityText = findViewById(R.id.editPriority);
 
+        Intent intent = getIntent();
 
         LocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +62,18 @@ public class CreateTaskActivity extends AppCompatActivity {
                 goToMapActivity();
             }
         });
+
+        try {
+            String address = (String) intent.getSerializableExtra("Address");
+            double taskLat = (double) intent.getSerializableExtra("Latitude");
+            double taskLong = (double) intent.getSerializableExtra("Longitude");
+            task.setTaskLocation(address);
+            task.setTaskLatitude(taskLat);
+            task.setTaskLongitude(taskLong);
+        }
+        catch(NullPointerException e){
+            e.printStackTrace();
+        }
 
         createTaskButton.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -67,9 +84,6 @@ public class CreateTaskActivity extends AppCompatActivity {
                 if(nameText.getText().toString() != "") {
                     task.setTaskName(nameText.getText().toString());
                 }
-                if(locationText.getText().toString() != "") {
-                    task.setTaskLocation(locationText.getText().toString());
-                }
                 if(priorityText.getText().toString() != "") {
                     try {
                         task.setTaskPriority(Integer.parseInt(priorityText.getText().toString()));
@@ -79,6 +93,10 @@ public class CreateTaskActivity extends AppCompatActivity {
                 if(task.getTaskName() == null || task.getTaskName().equals("")) {
                     goToMainActivity();
                 }
+
+                task.setOverallPriority();
+
+                System.out.println(task.getOverallPriority());
 
                 priorityText.setText("");
                 goToMainActivityWithTask();
@@ -102,55 +120,42 @@ public class CreateTaskActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public static class TimePickerFragment extends DialogFragment implements TimePickerDialog.OnTimeSetListener{
+    public void popTimePicker(View view){
+        TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                taskDate.setHours(hourOfDay);
+                taskDate.setMinutes(minute);
+                taskDate.setSeconds(0);
+            }
+        };
 
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState){
+        int style = AlertDialog.THEME_HOLO_DARK;
 
-            final Calendar cal = Calendar.getInstance();
-            int hour = cal.get(Calendar.HOUR_OF_DAY) + 1;
-            int minute = 0;
+        TimePickerDialog timePickerDialog = new TimePickerDialog(this, style, onTimeSetListener, LocalTime.now().getHour() + 1, 0, false);
 
-            return new TimePickerDialog(getActivity(), this, hour, minute, DateFormat.is24HourFormat(getActivity()));
-        }
-        public void onTimeSet(TimePicker view,int hourOfDay, int minute){
-            taskDate.setHours(hourOfDay);
-            taskDate.setMinutes(minute);
-            taskDate.setSeconds(0);
-        }
+        timePickerDialog.setTitle("Select Time");
+        timePickerDialog.show();
     }
 
-    public void showTimePickerDialog(View v) {
-        DialogFragment newFragment = new TimePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "timePicker");
-    }
 
-    public static class DatePickerFragment extends DialogFragment
-            implements DatePickerDialog.OnDateSetListener {
+    public void popDatePicker(View view){
+        DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int setyear, int setmonth, int setdayOfMonth) {
+                year = setyear - 1900;
+                month = setmonth;
+                day = setdayOfMonth;
+                taskDate.setYear(year);
+                taskDate.setMonth(month);
+                taskDate.setDate(day);
+            }
+        };
 
-        @Override
-        public Dialog onCreateDialog(Bundle savedInstanceState) {
-            // Use the current date as the default date in the picker
-            final Calendar cal = Calendar.getInstance();
-            int year = cal.get(Calendar.YEAR);
-            int month = cal.get(Calendar.MONTH);
-            int day = cal.get(Calendar.DAY_OF_MONTH);
+        int style = AlertDialog.THEME_HOLO_LIGHT;
 
-            // Create a new instance of DatePickerDialog and return it
-            return new DatePickerDialog(requireContext(), this, year, month, day);
-        }
-
-        public void onDateSet(DatePicker view, int year, int month, int day) {
-            // Do something with the date chosen by the user
-            taskDate.setYear(year - 1900);
-            taskDate.setMonth(month);
-            taskDate.setDate(day);
-
-        }
-    }
-
-    public void showDatePickerDialog(View v) {
-        DialogFragment newFragment = new DatePickerFragment();
-        newFragment.show(getSupportFragmentManager(), "datePicker");
+        DatePickerDialog datePickerDialog = new DatePickerDialog(this, style, onDateSetListener, LocalDate.now().getYear(), LocalDate.now().getMonthValue() - 1, LocalDate.now().getDayOfMonth());
+        datePickerDialog.setTitle("Select Date");
+        datePickerDialog.show();
     }
 }

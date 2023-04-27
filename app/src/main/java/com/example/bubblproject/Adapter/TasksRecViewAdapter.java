@@ -40,7 +40,7 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
         TaskItem task = tasks.get(position);
 
         holder.taskName.setText(task.getTaskName());
-        holder.priorityBar.setProgress(task.getTaskPriority());
+        holder.priorityBar.setProgress((int) task.getOverallPriority());
         holder.locationText.setText("Location: " + task.getTaskLocation());
 
         boolean isVisible = tasks.get(position).isVisible();

@@ -5,6 +5,7 @@ import androidx.fragment.app.DialogFragment;
 
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.location.Location;
 import android.text.format.DateFormat;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
@@ -24,7 +25,9 @@ public class CreateTaskActivity extends AppCompatActivity {
     private EditText nameText;
     private EditText locationText;
     private EditText priorityText;
-    private Button button;
+    private Button createTaskButton;
+
+    private Button LocationButton;
 
     private static TaskItem task = new TaskItem();
 
@@ -37,13 +40,22 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
-        button = (Button) findViewById(R.id.button);
+        createTaskButton = (Button) findViewById(R.id.button);
+        LocationButton = (Button) findViewById(R.id.LocationButton);
 
         nameText = findViewById(R.id.editName);
         locationText = findViewById(R.id.editLocation);
         priorityText = findViewById(R.id.editPriority);
 
-        button.setOnClickListener(new View.OnClickListener(){
+
+        LocationButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                goToMapActivity();
+            }
+        });
+
+        createTaskButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
 
@@ -77,6 +89,11 @@ public class CreateTaskActivity extends AppCompatActivity {
     private void goToMainActivityWithTask() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.putExtra("Hello", task);
+        startActivity(intent);
+    }
+
+    private void goToMapActivity(){
+        Intent intent = new Intent(this, MapsActivity.class);
         startActivity(intent);
     }
 

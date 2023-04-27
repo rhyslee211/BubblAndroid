@@ -45,6 +45,16 @@
         android:text="Select Time" />
 
     <Button
+        android:id = "@+id/LocationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="300dp"
+        android:backgroundTint="#2ea8ed"
+        android:text="Select Location" />
+
+
+    <Button
         android:id = "@+id/dateButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

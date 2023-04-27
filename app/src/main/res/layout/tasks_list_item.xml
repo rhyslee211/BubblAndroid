@@ -10,7 +10,7 @@
     app:cardMaxElevation="10dp"
     app:cardPreventCornerOverlap="true"
     app:cardUseCompatPadding="true"
-    android:backgroundTint="#BCCCDC">
+    android:backgroundTint="#FFFFFFFF">
 
     <LinearLayout
         android:id="@+id/taskItem"
@@ -30,6 +30,19 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"/>
 
+        <TextView
+            android:id="@+id/overallPriority"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Overall Priority"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="15dp"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+
         <ProgressBar
             android:id="@+id/priorityBar"
             style="?android:attr/progressBarStyleHorizontal"
@@ -41,7 +54,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/taskName"
             android:progressDrawable="@drawable/custom_progress_bg"
-            android:max="5" />
+            android:max="15" />
 
         <RelativeLayout
             android:layout_width="wrap_content"

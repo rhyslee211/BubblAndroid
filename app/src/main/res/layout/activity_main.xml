@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/bubblLogo"
-        android:background="#FF334E68">
+        android:background="#FFEEEEEE">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/tasksRecView"
@@ -41,7 +41,7 @@
             android:layout_marginBottom="20dp"
             android:backgroundTint="#FF627D98"
             app:backgroundTint="@color/black"
-            app:borderWidth="2dp" />
+            app:borderWidth="3dp" />
     </RelativeLayout>
 
 </RelativeLayout>

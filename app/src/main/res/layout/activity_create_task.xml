@@ -4,90 +4,167 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    android:background="#FF627D98"
+    tools:context=".CreateTaskActivity">
 
-    <TextView
-        android:id = "@+id/tasksText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle = "bold"
-        android:text = "Create New Task"
-        android:textColor="@android:color/black"
-        android:textSize = "32sp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop = "16dp"/>
-
-
-    <EditText
-        android:id = "@+id/editName"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize = "20sp"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop = "64dp"
-        android:inputType = "textAutoComplete"
-        android:hint="Task Name"
-        android:autofillHints="name"
-        />
-
-
-    <Button
-        android:id = "@+id/timeButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="100dp"
-        android:backgroundTint="#2ea8ed"
-        android:onClick="popTimePicker"
-        android:text="Select Time" />
-
-    <Button
-        android:id = "@+id/LocationButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="200dp"
-        android:layout_marginTop="300dp"
-        android:backgroundTint="#2ea8ed"
-        android:text="Select Location" />
-
-
-    <Button
-        android:id = "@+id/dateButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="100dp"
-        android:backgroundTint="#2ea8ed"
-        android:onClick="popDatePicker"
-        android:text="Select Date" />
-
-    <EditText
-        android:id = "@+id/editPriority"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
-        android:textSize = "20sp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop = "140dp"
-        android:inputType = "textAutoComplete"
-        android:hint="Task Priority"
-        />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/bubblLogo"
+        android:layout_width="85dp"
+        android:layout_height="85dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="650dp"
-        android:backgroundTint="#7ea8ed"
-        android:textColor="@color/white"
-        android:text="Create Task"
-        />
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:src="@mipmap/ic_bubbl" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/taskView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/bubblLogo"
+        android:background="#FFEEEEEE"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tasksText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Create New Task"
+            android:textColor="@android:color/black"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/enterName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tasksText"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:text="Enter Task Name:"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tasksText" />
+
+        <EditText
+            android:id="@+id/editName"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:autofillHints="name"
+            android:hint="Task Name"
+            android:inputType="textAutoComplete"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/enterName" />
+
+
+        <TextView
+            android:id="@+id/enterLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:text="Enter Task Location:"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editName" />
+
+        <Button
+            android:id="@+id/LocationButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#FF627D98"
+            android:text="Select Location"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/enterLocation" />
+
+        <Button
+            android:id="@+id/timeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#FF627D98"
+            android:onClick="popTimePicker"
+            android:text="Select Time"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/dateButton"
+            app:layout_constraintTop_toBottomOf="@+id/enterDateTime" />
+
+        <Button
+            android:id="@+id/dateButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            android:backgroundTint="#FF627D98"
+            android:onClick="popDatePicker"
+            android:text="Select Date"
+            app:layout_constraintEnd_toStartOf="@+id/timeButton"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/enterDateTime" />
+
+        <EditText
+            android:id="@+id/editPriority"
+            android:layout_width="fill_parent"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:hint="Task Priority"
+            android:inputType="textAutoComplete"
+            android:textColor="@android:color/black"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/timeButton" />
+
+        <TextView
+            android:id="@+id/enterDateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:text="Enter Task Date and Time:"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/LocationButton" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:backgroundTint="#FF627D98"
+            android:text="Create Task"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editPriority" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </RelativeLayout>

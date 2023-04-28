@@ -29,14 +29,10 @@ import java.util.logging.Logger;
 
 public class CreateTaskActivity extends AppCompatActivity {
 
-    private EditText nameText;
-    private EditText priorityText;
-    private Button createTaskButton;
-
-    private Button LocationButton;
+    private EditText nameText, priorityText;
+    private Button createTaskButton, LocationButton;
 
     int hour, minutes, month, day, year;
-
 
     private TaskItem task = new TaskItem();
     private Date taskDate = new Date();
@@ -130,7 +126,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             }
         };
 
-        int style = AlertDialog.THEME_HOLO_DARK;
+        int style = AlertDialog.THEME_HOLO_LIGHT;
 
         TimePickerDialog timePickerDialog = new TimePickerDialog(this, style, onTimeSetListener, LocalTime.now().getHour() + 1, 0, false);
 

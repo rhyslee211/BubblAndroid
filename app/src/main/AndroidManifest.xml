@@ -34,7 +34,8 @@
             android:label="@string/title_activity_maps" />
         <activity
             android:name=".CreateTaskActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.BubblProject.NoActionBar"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

@@ -167,11 +167,10 @@ public class TaskItem implements Serializable {
 
             if(diff < 0){
                 isOverdue = true;
-                OverallPriority = 1;
+                OverallPriority = 100;
                 System.out.println(OverallPriority);
                 return;
             }else {
-
                 TimePrio = Math.pow(timeConst, diff);
             }
         }

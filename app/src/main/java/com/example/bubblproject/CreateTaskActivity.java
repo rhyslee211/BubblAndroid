@@ -41,6 +41,8 @@ public class CreateTaskActivity extends AppCompatActivity {
     private TaskItem task = new TaskItem();
     private Date taskDate = null;
 
+    private int prioClicked = 0;
+
 
 
     @Override
@@ -60,6 +62,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 lowPriority.toggle();
+                prioClicked = 1;
             }
         });
 
@@ -67,6 +70,7 @@ public class CreateTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mediumPriority.toggle();
+                prioClicked = 2;
             }
         });
 
@@ -74,12 +78,35 @@ public class CreateTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 highPriority.toggle();
+                prioClicked = 3;
             }
         });
 
 
 
         Intent intent = getIntent();
+
+        if(intent.getSerializableExtra("TaskName") != null){
+            nameText.setText((String) intent.getSerializableExtra("TaskName"));
+        }
+
+        if(intent.getSerializableExtra("TaskName") != null){
+            taskDate = (Date) intent.getSerializableExtra("TaskDate");
+        }
+
+        if(intent.getSerializableExtra("TaskPrio") != null){
+            prioClicked = (int) intent.getSerializableExtra("TaskPrio");
+
+            if(prioClicked == 1){
+                lowPriority.toggle();
+            }
+            else if(prioClicked == 2){
+                mediumPriority.toggle();
+            }
+            else if(prioClicked == 3){
+                highPriority.toggle();
+            }
+        }
 
         LocationButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,12 +151,6 @@ public class CreateTaskActivity extends AppCompatActivity {
                 if(nameText.getText().toString() != "") {
                     task.setTaskName(nameText.getText().toString());
                 }
-                if(priorityText.getText().toString() != "") {
-                    try {
-                        task.setTaskPriority(Integer.parseInt(priorityText.getText().toString()));
-                    }
-                    catch (NumberFormatException e){}
-                }
                 if(task.getTaskName() == null || task.getTaskName().equals("")) {
                     goToMainActivity();
                 }
@@ -138,7 +159,6 @@ public class CreateTaskActivity extends AppCompatActivity {
 
                 System.out.println(task.getOverallPriority());
 
-                priorityText.setText("");
                 goToMainActivityWithTask();
             }
         });
@@ -157,6 +177,11 @@ public class CreateTaskActivity extends AppCompatActivity {
 
     private void goToMapActivity(){
         Intent intent = new Intent(this, MapsActivity.class);
+        if(nameText.getText().toString().equals("") == false) {
+            intent.putExtra("TaskName", nameText.getText().toString());
+        }
+        intent.putExtra("TaskDate", taskDate);
+        intent.putExtra("TaskPrio", prioClicked);
         startActivity(intent);
     }
 
@@ -195,6 +220,8 @@ public class CreateTaskActivity extends AppCompatActivity {
             public void onDateSet(DatePicker view, int setyear, int setmonth, int setdayOfMonth) {
                 if(Objects.isNull(taskDate)){
                     taskDate = new Date();
+                    taskDate.setHours(taskDate.getHours() + 1);
+                    taskDate.setMinutes(0);
                 }
                 year = setyear - 1900;
                 month = setmonth;

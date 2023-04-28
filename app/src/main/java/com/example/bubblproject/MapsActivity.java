@@ -17,6 +17,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -81,9 +83,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     try {
                         address = addressList.get(0);
+                        mMap.clear();
+                        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
+                        mMap.addMarker(new MarkerOptions().position(CanavanArena).title("Current Location").icon(bitmapDescriptor));
                         locPos = new LatLng(address.getLatitude(), address.getLongitude());
                         mMap.addMarker(new MarkerOptions().position(locPos).title(locationName));
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locPos, 10));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locPos, 12));
                     }
                     catch(IndexOutOfBoundsException e){
                         Context context = getApplicationContext();
@@ -164,9 +169,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
 
-
-        mMap.addMarker(new MarkerOptions().position(CanavanArena).title("Current Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(CanavanArena));
+        mMap.addMarker(new MarkerOptions().position(CanavanArena).title("Current Location").icon(bitmapDescriptor));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(CanavanArena, 10));
     }
 }

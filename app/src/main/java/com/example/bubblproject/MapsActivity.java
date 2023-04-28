@@ -64,10 +64,20 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         e.printStackTrace();
                     }
 
-                    address = addressList.get(0);
-                    locPos = new LatLng(address.getLatitude(), address.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(locPos).title(locationName));
-                    mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locPos, 10));
+                    try {
+                        address = addressList.get(0);
+                        locPos = new LatLng(address.getLatitude(), address.getLongitude());
+                        mMap.addMarker(new MarkerOptions().position(locPos).title(locationName));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locPos, 10));
+                    }
+                    catch(IndexOutOfBoundsException e){
+                        Context context = getApplicationContext();
+                        CharSequence text = "Location not found.";
+                        int duration = Toast.LENGTH_SHORT;
+                        e.printStackTrace();
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                    }
                 }
                 return false;
             }

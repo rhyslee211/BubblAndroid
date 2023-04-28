@@ -81,7 +81,7 @@ public class CreateTaskActivity extends AppCompatActivity {
                 }
                 if(priorityText.getText().toString() != "") {
                     try {
-                        task.setTaskPriority(Integer.parseInt(priorityText.getText().toString()));
+                        task.setTaskPriority(Double.parseDouble(priorityText.getText().toString()));
                     }
                     catch (NumberFormatException e){}
                 }

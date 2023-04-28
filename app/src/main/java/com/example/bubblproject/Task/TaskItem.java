@@ -30,6 +30,8 @@ public class TaskItem implements Serializable {
     private double OverallPriority;
 
     private boolean isVisible;
+
+    private boolean isOverdue;
     //TODO: Create an overall Priority variable
 
     public TaskItem(String TaskName, Date TaskDate,  String TaskLocation, int TaskPriority){
@@ -40,6 +42,7 @@ public class TaskItem implements Serializable {
         this.isVisible = false;
         this.TaskLongitude = 0;
         this.OverallPriority = 0;
+        this.isOverdue = false;
     }
 
     public TaskItem(String TaskName, int TaskPriority, String Location){
@@ -137,27 +140,35 @@ public class TaskItem implements Serializable {
             DistPrio = 1;
         }
 
-        Date currentDate = new Date(LocalDateTime.now().getYear() - 1900, LocalDateTime.now().getMonthValue() - 1, LocalDateTime.now().getDayOfMonth(), LocalDateTime.now().getHour(), LocalDateTime.now().getMinute());
+        if(Objects.isNull(TaskDate) == false){
+            Date currentDate = new Date(LocalDateTime.now().getYear() - 1900, LocalDateTime.now().getMonthValue() - 1, LocalDateTime.now().getDayOfMonth(), LocalDateTime.now().getHour(), LocalDateTime.now().getMinute());
 
 
-        System.out.println(getTaskDate().toString());
-        System.out.println(currentDate.toString());
-        long diffInMillis = Math.abs(TaskDate.getTime() - currentDate.getTime());
-        long diff = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
+            System.out.println(getTaskDate().toString());
+            System.out.println(currentDate.toString());
+            long diffInMillis = TaskDate.getTime() - currentDate.getTime();
+            long diff = TimeUnit.HOURS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 
-        System.out.println(diff);
+            System.out.println(diff);
 
-        if(diff < 1)
-            TimePrio = 5;
-        else if (diff < 2) {
-            TimePrio = 4;
-        } else if (diff < 4) {
-            TimePrio = 3;
-        } else if (diff < 7) {
-            TimePrio = 2;
+            if(diff < 0 || diffInMillis < 0){
+                TimePrio = 16;
+                isOverdue = true;
+            }
+            else if (diff < 24 && diff >= 0)
+                TimePrio = 5;
+            else if (diff < 48) {
+                TimePrio = 4;
+            } else if (diff < 96) {
+                TimePrio = 3;
+            } else if (diff < 168) {
+                TimePrio = 2;
+            } else {
+                TimePrio = 1;
+            }
         }
         else{
-            TimePrio = 1;
+            TimePrio = 0;
         }
 
         OverallPriority = DistPrio + TimePrio + TaskPriority;

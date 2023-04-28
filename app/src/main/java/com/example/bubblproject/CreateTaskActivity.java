@@ -25,6 +25,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Objects;
 import java.util.logging.Logger;
 
 public class CreateTaskActivity extends AppCompatActivity {
@@ -35,7 +36,7 @@ public class CreateTaskActivity extends AppCompatActivity {
     int hour, minutes, month, day, year;
 
     private TaskItem task = new TaskItem();
-    private Date taskDate = new Date();
+    private Date taskDate = null;
 
 
 
@@ -120,6 +121,10 @@ public class CreateTaskActivity extends AppCompatActivity {
         TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
             public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                if(Objects.isNull(taskDate)){
+                    taskDate = new Date();
+                }
+
                 taskDate.setHours(hourOfDay);
                 taskDate.setMinutes(minute);
                 taskDate.setSeconds(0);
@@ -128,7 +133,13 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         int style = AlertDialog.THEME_HOLO_LIGHT;
 
-        TimePickerDialog timePickerDialog = new TimePickerDialog(this, style, onTimeSetListener, LocalTime.now().getHour() + 1, 0, false);
+        TimePickerDialog timePickerDialog;
+        if(Objects.isNull(taskDate)) {
+            timePickerDialog = new TimePickerDialog(this, style, onTimeSetListener, LocalTime.now().getHour() + 1, 0, false);
+        }
+        else{
+            timePickerDialog = new TimePickerDialog(this, style, onTimeSetListener, taskDate.getHours(), taskDate.getMinutes(), false);
+        }
 
         timePickerDialog.setTitle("Select Time");
         timePickerDialog.show();
@@ -139,6 +150,9 @@ public class CreateTaskActivity extends AppCompatActivity {
         DatePickerDialog.OnDateSetListener onDateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int setyear, int setmonth, int setdayOfMonth) {
+                if(Objects.isNull(taskDate)){
+                    taskDate = new Date();
+                }
                 year = setyear - 1900;
                 month = setmonth;
                 day = setdayOfMonth;
@@ -150,7 +164,14 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         int style = AlertDialog.THEME_HOLO_LIGHT;
 
-        DatePickerDialog datePickerDialog = new DatePickerDialog(this, style, onDateSetListener, LocalDate.now().getYear(), LocalDate.now().getMonthValue() - 1, LocalDate.now().getDayOfMonth());
+        DatePickerDialog datePickerDialog;
+        if(Objects.isNull(taskDate)) {
+            datePickerDialog = new DatePickerDialog(this, style, onDateSetListener, LocalDate.now().getYear(), LocalDate.now().getMonthValue() - 1, LocalDate.now().getDayOfMonth());
+        }
+        else{
+            datePickerDialog = new DatePickerDialog(this, style, onDateSetListener, taskDate.getYear() + 1900, taskDate.getMonth(), taskDate.getDate());
+        }
+
         datePickerDialog.setTitle("Select Date");
         datePickerDialog.show();
     }

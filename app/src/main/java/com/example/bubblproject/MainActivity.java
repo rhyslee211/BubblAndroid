@@ -30,9 +30,7 @@ import java.util.Comparator;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView tasksRecView;
     private FloatingActionButton addTask;
-
     public static LatLng CanavanArena = new LatLng(40.74457, -74.02575);
-
     public static ArrayList<TaskItem> tasks = new ArrayList<>();
 
     @Override
@@ -52,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         TaskItem task = (TaskItem) intent.getSerializableExtra("Hello");//searches for the Create Task intent
-        //TextView textView = findViewById(R.id.taskText);//finds the textview text box:
+
         try {
             if (task.getTaskName() != null && task.getTaskName().equals("") == false) {
                 tasks.add(task);

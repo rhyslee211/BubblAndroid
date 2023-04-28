@@ -1,6 +1,7 @@
 package com.example.bubblproject.Adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 
 public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapter.ViewHolder> {
 
-    private ArrayList<TaskItem> tasks = new ArrayList<>();
+    private ArrayList<TaskItem> tasks;
     private Context context;
 
     public TasksRecViewAdapter(ArrayList<TaskItem> tasks, Context context) {
@@ -38,6 +39,8 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TaskItem task = tasks.get(position);
+
+        Log.d("Checking RecView", "Do we ever bind view holder?");
 
         holder.taskName.setText(task.getTaskName());
         holder.priorityBar.setProgress((int) task.getOverallPriority());

@@ -95,7 +95,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         System.out.println(locPos.longitude);
 
         Intent intent = new Intent(this, CreateTaskActivity.class);
-        intent.putExtra("Address", address.getAddressLine(1));
+        intent.putExtra("Address", address.getAddressLine(0));
         intent.putExtra("Latitude", locPos.latitude);
         intent.putExtra("Longitude", locPos.longitude);
         startActivity(intent);

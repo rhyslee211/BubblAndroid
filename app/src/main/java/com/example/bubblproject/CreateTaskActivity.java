@@ -31,9 +31,7 @@ public class CreateTaskActivity extends AppCompatActivity {
 
     private EditText nameText, priorityText;
     private Button createTaskButton, LocationButton;
-
     int hour, minutes, month, day, year;
-
     private TaskItem task = new TaskItem();
     private Date taskDate = new Date();
 

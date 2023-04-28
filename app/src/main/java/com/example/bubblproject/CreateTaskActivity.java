@@ -33,7 +33,7 @@ import java.util.logging.Logger;
 public class CreateTaskActivity extends AppCompatActivity {
 
     private EditText nameText, priorityText;
-    private Button createTaskButton, LocationButton;
+    private Button createTaskButton, LocationButton,  cancelButton;
     private RadioButton lowPriority, mediumPriority, highPriority;
     private RadioGroup priorityLevel;
     int hour, minutes, month, day, year;
@@ -48,8 +48,9 @@ public class CreateTaskActivity extends AppCompatActivity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_task);
-        createTaskButton = (Button) findViewById(R.id.button);
-        LocationButton = (Button) findViewById(R.id.LocationButton);
+        createTaskButton = findViewById(R.id.button);
+        cancelButton = findViewById(R.id.cancelButton);
+        LocationButton = findViewById(R.id.LocationButton);
         nameText = findViewById(R.id.editName);
 
         lowPriority = findViewById(R.id.lowPriority);
@@ -124,12 +125,7 @@ public class CreateTaskActivity extends AppCompatActivity {
                 if(nameText.getText().toString() != "") {
                     task.setTaskName(nameText.getText().toString());
                 }
-                if(priorityText.getText().toString() != "") {
-                    try {
-                        task.setTaskPriority(Integer.parseInt(priorityText.getText().toString()));
-                    }
-                    catch (NumberFormatException e){}
-                }
+
                 if(task.getTaskName() == null || task.getTaskName().equals("")) {
                     goToMainActivity();
                 }
@@ -138,8 +134,14 @@ public class CreateTaskActivity extends AppCompatActivity {
 
                 System.out.println(task.getOverallPriority());
 
-                priorityText.setText("");
                 goToMainActivityWithTask();
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                goToMainActivity();
             }
         });
     }

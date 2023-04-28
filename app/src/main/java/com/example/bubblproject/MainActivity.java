@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 //import com.example.bubblproject.databinding.ActivityMainBinding;
 
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.Collections;

@@ -4,17 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FF627D98"
-    tools:context=".CreateTaskActivity">
+    android:background="#48a2c7"
+    tools:context=".MainActivity">
 
     <ImageView
         android:id="@+id/bubblLogo"
-        android:layout_width="85dp"
-        android:layout_height="85dp"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="16dp"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:src="@mipmap/ic_bubbl" />
+        android:layout_marginBottom="16dp"
+        android:src="@mipmap/ic_bubbl_inverted" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/taskView"
@@ -61,7 +61,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:autofillHints="name"
-            android:backgroundTint="#627D98"
+            android:backgroundTint="#48a2c7"
             android:hint="Task Name"
             android:inputType="textAutoComplete"
             android:textColor="@android:color/black"
@@ -91,10 +91,11 @@
             android:id="@+id/LocationButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:backgroundTint="#FF627D98"
+            android:backgroundTint="#48a2c7"
             android:text="Select Location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/enterLocation" />
 
@@ -116,7 +117,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:backgroundTint="#FF627D98"
+            android:backgroundTint="#48a2c7"
             android:onClick="popTimePicker"
             android:text="Select Time"
             app:layout_constraintEnd_toEndOf="parent"
@@ -130,7 +131,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="48dp"
-            android:backgroundTint="#FF627D98"
+            android:backgroundTint="#48a2c7"
             android:onClick="popDatePicker"
             android:text="Select Date"
             app:layout_constraintEnd_toStartOf="@+id/timeButton"
@@ -168,7 +169,7 @@
                 android:id="@+id/lowPriority"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:buttonTint="#627D98"
+                android:buttonTint="#48a2c7"
                 android:padding="8dp"
                 android:text="Low" />
 
@@ -176,7 +177,7 @@
                 android:id="@+id/mediumPriority"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:buttonTint="#627D98"
+                android:buttonTint="#48a2c7"
                 android:padding="8dp"
                 android:text="Medium" />
 
@@ -184,7 +185,7 @@
                 android:id="@+id/highPriority"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:buttonTint="#627D98"
+                android:buttonTint="#48a2c7"
                 android:padding="8dp"
                 android:text="High" />
 
@@ -195,14 +196,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="32dp"
-            android:backgroundTint="#FF627D98"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#48a2c7"
             android:text="Create Task"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
+        <Button
+            android:id="@+id/cancelButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#48a2c7"
+            android:text="Cancel"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

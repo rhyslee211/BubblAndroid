@@ -18,6 +18,8 @@ import static java.time.temporal.ChronoUnit.DAYS;
 
 public class TaskItem implements Serializable {
 
+    private final double timeConst = 0.99178;
+    private final double locConst = 0.70710;
     private String TaskName;
     private Date TaskDate;
     private String TaskLocation;
@@ -27,12 +29,15 @@ public class TaskItem implements Serializable {
 
     private double TaskLongitude;
 
-    private double OverallPriority;
+    private int OverallPriority;
 
     private boolean isVisible;
 
+    private int hasDateTime;
+    private int hasLocation;
+    private int hasSetPrio;
+
     private boolean isOverdue;
-    //TODO: Create an overall Priority variable
 
     public TaskItem(String TaskName, Date TaskDate,  String TaskLocation, int TaskPriority){
         this.TaskName = TaskName;
@@ -43,6 +48,9 @@ public class TaskItem implements Serializable {
         this.TaskLongitude = 0;
         this.OverallPriority = 0;
         this.isOverdue = false;
+        this.hasDateTime = 0;
+        this.hasLocation = 0;
+        this.hasSetPrio = 0;
     }
 
     public TaskItem(String TaskName, int TaskPriority, String Location){
@@ -50,6 +58,9 @@ public class TaskItem implements Serializable {
         this.TaskPriority = TaskPriority;
         this.TaskLocation = Location;
         this.isVisible = false;
+        this.hasDateTime = 0;
+        this.hasLocation = 0;
+        this.hasSetPrio = 0;
     }
 
     public TaskItem(){
@@ -61,6 +72,9 @@ public class TaskItem implements Serializable {
         this.TaskLatitude = 0;
         this.TaskLongitude = 0;
         this.OverallPriority = 0;
+        this.hasDateTime = 0;
+        this.hasLocation = 0;
+        this.hasSetPrio = 0;
     }
     public String getTaskName() {
         return TaskName;
@@ -116,31 +130,31 @@ public class TaskItem implements Serializable {
 
     public void setOverallPriority(){
 
-        int DistPrio;
-        int TimePrio;
+        double DistPrio;
+        double TimePrio;
         //LatLng destinationLocation = new LatLng(TaskLatitude, TaskLongitude);
 
-        double Latdistance = TaskLatitude - CanavanArena.latitude;
-        Latdistance = Latdistance * 69;
-        double Longdistance = TaskLongitude - CanavanArena.longitude;
-        Longdistance = Longdistance * 54.6;
+        if(Objects.isNull(TaskLocation) == false){
+            hasLocation = 1;
+            double Latdistance = TaskLatitude - CanavanArena.latitude;
+            double mileLatdistance = Latdistance * 69;
+            double Longdistance = TaskLongitude - CanavanArena.longitude;
+            double mileLongdistance = Longdistance * 54.6;
 
-        double totalDist = Math.sqrt(Math.pow(Latdistance, 2) + Math.pow(Longdistance, 2));
+            double totalDist = Math.sqrt(Math.pow(mileLatdistance, 2) + Math.pow(mileLongdistance, 2));
 
-        if(totalDist < 1)
-            DistPrio = 5;
-        else if (totalDist < 2) {
-            DistPrio = 4;
-        } else if (totalDist < 5) {
-            DistPrio = 3;
-        } else if (totalDist < 10) {
-            DistPrio = 2;
+            DistPrio = Math.pow(locConst, totalDist);
         }
         else{
-            DistPrio = 1;
+            DistPrio = 0;
+        }
+
+        if(TaskPriority != 0){
+            hasSetPrio = 1;
         }
 
         if(Objects.isNull(TaskDate) == false){
+            hasDateTime = 1;
             Date currentDate = new Date(LocalDateTime.now().getYear() - 1900, LocalDateTime.now().getMonthValue() - 1, LocalDateTime.now().getDayOfMonth(), LocalDateTime.now().getHour(), LocalDateTime.now().getMinute());
 
 
@@ -151,28 +165,31 @@ public class TaskItem implements Serializable {
 
             System.out.println(diff);
 
-            if(diff < 0 || diffInMillis < 0){
-                TimePrio = 16;
+            if(diff < 0){
                 isOverdue = true;
-            }
-            else if (diff < 24 && diff >= 0)
-                TimePrio = 5;
-            else if (diff < 48) {
-                TimePrio = 4;
-            } else if (diff < 96) {
-                TimePrio = 3;
-            } else if (diff < 168) {
-                TimePrio = 2;
-            } else {
-                TimePrio = 1;
+                OverallPriority = 1;
+                System.out.println(OverallPriority);
+                return;
+            }else {
+
+                TimePrio = Math.pow(timeConst, diff);
             }
         }
         else{
             TimePrio = 0;
         }
 
-        OverallPriority = DistPrio + TimePrio + TaskPriority;
+        System.out.println("User set prio: " + TaskPriority);
+        System.out.println("Distance Prio: " + DistPrio);
+        System.out.println("Time prio: " + TimePrio);
 
+        if(hasDateTime + hasLocation + hasSetPrio > 0) {
+            OverallPriority = (int) ((int) 100 * ((DistPrio + TimePrio + TaskPriority) / (hasDateTime + hasLocation + hasSetPrio)));
+        }
+        else{
+            OverallPriority = 0;
+        }
+        System.out.println(OverallPriority);
     }
 
     public double getOverallPriority(){return this.OverallPriority;}

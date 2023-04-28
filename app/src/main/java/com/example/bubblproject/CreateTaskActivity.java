@@ -124,6 +124,12 @@ public class CreateTaskActivity extends AppCompatActivity {
                 if(nameText.getText().toString() != "") {
                     task.setTaskName(nameText.getText().toString());
                 }
+                if(priorityText.getText().toString() != "") {
+                    try {
+                        task.setTaskPriority(Integer.parseInt(priorityText.getText().toString()));
+                    }
+                    catch (NumberFormatException e){}
+                }
                 if(task.getTaskName() == null || task.getTaskName().equals("")) {
                     goToMainActivity();
                 }
@@ -132,6 +138,7 @@ public class CreateTaskActivity extends AppCompatActivity {
 
                 System.out.println(task.getOverallPriority());
 
+                priorityText.setText("");
                 goToMainActivityWithTask();
             }
         });

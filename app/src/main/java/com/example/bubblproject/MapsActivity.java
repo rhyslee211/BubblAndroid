@@ -17,11 +17,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -35,6 +38,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LatLng locPos;
     private Address address;
 
+    private Date taskDate = null;
+
+    private String taskName = "";
+
+    private int prioClicked = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +51,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
 
         mapSearch = findViewById(R.id.mapSearch);
+
+        Intent intent = getIntent();
+
+        taskDate = (Date) intent.getSerializableExtra("TaskDate");
+        taskName = (String) intent.getSerializableExtra("TaskName");
+        System.out.println((int) intent.getSerializableExtra("TaskPrio"));
+        prioClicked = (int) intent.getSerializableExtra("TaskPrio");
+
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -66,9 +83,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                     try {
                         address = addressList.get(0);
+                        mMap.clear();
+                        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
+                        mMap.addMarker(new MarkerOptions().position(CanavanArena).title("Current Location").icon(bitmapDescriptor));
                         locPos = new LatLng(address.getLatitude(), address.getLongitude());
                         mMap.addMarker(new MarkerOptions().position(locPos).title(locationName));
-                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locPos, 10));
+                        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(locPos, 12));
                     }
                     catch(IndexOutOfBoundsException e){
                         Context context = getApplicationContext();
@@ -97,17 +117,41 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             }
         });
 
+        cancelButton = findViewById(R.id.cancelLocation);
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoCreateActivityWithoutLocation();
+            }
+        });
+
         mapFragment.getMapAsync(MapsActivity.this);
     }
 
     private void gotoCreateActivity() {
 
-        System.out.println(locPos.longitude);
-
         Intent intent = new Intent(this, CreateTaskActivity.class);
         intent.putExtra("Address", address.getAddressLine(0));
         intent.putExtra("Latitude", locPos.latitude);
         intent.putExtra("Longitude", locPos.longitude);
+        if(taskName != null) {
+            intent.putExtra("TaskName", taskName);
+        }
+        intent.putExtra("TaskDate", taskDate);
+        intent.putExtra("TaskPrio", prioClicked);
+        startActivity(intent);
+    }
+
+    private void gotoCreateActivityWithoutLocation() {
+
+        Intent intent = new Intent(this, CreateTaskActivity.class);
+        if(taskName != null) {
+            intent.putExtra("TaskName", taskName);
+        }
+        intent.putExtra("TaskDate", taskDate);
+        System.out.println(prioClicked);
+        intent.putExtra("TaskPrio", prioClicked);
         startActivity(intent);
     }
 
@@ -125,9 +169,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
+        BitmapDescriptor bitmapDescriptor = BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE);
 
-
-        mMap.addMarker(new MarkerOptions().position(CanavanArena).title("Current Location"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(CanavanArena));
+        mMap.addMarker(new MarkerOptions().position(CanavanArena).title("Current Location").icon(bitmapDescriptor));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(CanavanArena, 10));
     }
 }

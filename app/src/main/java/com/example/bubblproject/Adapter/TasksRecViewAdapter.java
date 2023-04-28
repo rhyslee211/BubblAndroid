@@ -45,8 +45,12 @@ public class TasksRecViewAdapter extends RecyclerView.Adapter<TasksRecViewAdapte
         holder.taskName.setText(task.getTaskName());
         holder.priorityBar.setProgress((int) task.getOverallPriority());
         holder.locationText.setText("Location: " + task.getTaskLocation());
-        holder.dateText.setText(task.getTaskDate().toString());
-        holder.overallPriority.setText("Overall Priority: " + String.valueOf(task.getOverallPriority()));
+        if (task.getTaskDate() != null) {
+            holder.dateText.setText(task.getTaskDate().toString());
+        } else {
+            holder.dateText.setText("N/A");
+        }
+        holder.overallPriority.setText("Overall Priority: " + String.valueOf(task.getOverallPriority()) + "%");
 
         boolean isVisible = tasks.get(position).isVisible();
         holder.expandableLayout.setVisibility(isVisible ? View.VISIBLE : View.GONE);

@@ -137,8 +137,11 @@ public class TaskItem implements Serializable {
             DistPrio = 1;
         }
 
-        Date currentDate = new Date(LocalDateTime.now().getYear(), LocalDateTime.now().getMonthValue(), LocalDateTime.now().getDayOfYear(), LocalDateTime.now().getHour(), LocalDateTime.now().getMinute());
+        Date currentDate = new Date(LocalDateTime.now().getYear() - 1900, LocalDateTime.now().getMonthValue() - 1, LocalDateTime.now().getDayOfMonth(), LocalDateTime.now().getHour(), LocalDateTime.now().getMinute());
 
+
+        System.out.println(getTaskDate().toString());
+        System.out.println(currentDate.toString());
         long diffInMillis = Math.abs(TaskDate.getTime() - currentDate.getTime());
         long diff = TimeUnit.DAYS.convert(diffInMillis, TimeUnit.MILLISECONDS);
 

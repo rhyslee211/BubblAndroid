@@ -16,6 +16,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TimePicker;
 
 import com.example.bubblproject.Task.TaskItem;
@@ -32,7 +34,10 @@ public class CreateTaskActivity extends AppCompatActivity {
 
     private EditText nameText, priorityText;
     private Button createTaskButton, LocationButton;
+    private RadioButton lowPriority, mediumPriority, highPriority;
+    private RadioGroup priorityLevel;
     int hour, minutes, month, day, year;
+    double priority;
     private TaskItem task = new TaskItem();
     private Date taskDate = null;
 
@@ -45,9 +50,34 @@ public class CreateTaskActivity extends AppCompatActivity {
         setContentView(R.layout.activity_create_task);
         createTaskButton = (Button) findViewById(R.id.button);
         LocationButton = (Button) findViewById(R.id.LocationButton);
-
         nameText = findViewById(R.id.editName);
-        priorityText = findViewById(R.id.editPriority);
+
+        lowPriority = findViewById(R.id.lowPriority);
+        mediumPriority = findViewById(R.id.mediumPriority);
+        highPriority = findViewById(R.id.highPriority);
+
+        lowPriority.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lowPriority.toggle();
+            }
+        });
+
+        mediumPriority.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mediumPriority.toggle();
+            }
+        });
+
+        highPriority.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                highPriority.toggle();
+            }
+        });
+
+
 
         Intent intent = getIntent();
 
@@ -57,6 +87,8 @@ public class CreateTaskActivity extends AppCompatActivity {
                 goToMapActivity();
             }
         });
+
+
 
         try {
             String address = (String) intent.getSerializableExtra("Address");
@@ -74,16 +106,23 @@ public class CreateTaskActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
 
+                if (lowPriority.isChecked()){
+                    System.out.println("0.33");
+                    task.setTaskPriority(0.33);
+                } else if (mediumPriority.isChecked()) {
+                    System.out.println("0.66");
+                    task.setTaskPriority(0.66);
+                } else if (highPriority.isChecked()) {
+                    System.out.println("0.99");
+                    task.setTaskPriority(0.99);
+                } else {
+                    task.setTaskPriority(0.0);
+                }
+
                 task.setTaskDate(taskDate);
 
                 if(nameText.getText().toString() != "") {
                     task.setTaskName(nameText.getText().toString());
-                }
-                if(priorityText.getText().toString() != "") {
-                    try {
-                        task.setTaskPriority(Integer.parseInt(priorityText.getText().toString()));
-                    }
-                    catch (NumberFormatException e){}
                 }
                 if(task.getTaskName() == null || task.getTaskName().equals("")) {
                     goToMainActivity();
@@ -93,7 +132,6 @@ public class CreateTaskActivity extends AppCompatActivity {
 
                 System.out.println(task.getOverallPriority());
 
-                priorityText.setText("");
                 goToMainActivityWithTask();
             }
         });

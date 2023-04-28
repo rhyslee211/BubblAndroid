@@ -21,7 +21,7 @@ public class TaskItem implements Serializable {
     private String TaskName;
     private Date TaskDate;
     private String TaskLocation;
-    private int TaskPriority;
+    private double TaskPriority;
 
     private double TaskLatitude;
 
@@ -90,11 +90,11 @@ public class TaskItem implements Serializable {
         TaskLocation = taskLocation;
     }
 
-    public int getTaskPriority() {
+    public double getTaskPriority() {
         return TaskPriority;
     }
 
-    public void setTaskPriority(int taskPriority) {
+    public void setTaskPriority(double taskPriority) {
         TaskPriority = taskPriority;
     }
 

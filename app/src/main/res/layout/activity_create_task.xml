@@ -53,7 +53,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tasksText" />
 
-        <EditText
+        <androidx.appcompat.widget.AppCompatEditText
             android:id="@+id/editName"
             android:layout_width="fill_parent"
             android:layout_height="48dp"
@@ -61,9 +61,11 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:autofillHints="name"
+            android:backgroundTint="#627D98"
             android:hint="Task Name"
             android:inputType="textAutoComplete"
             android:textColor="@android:color/black"
+            android:textCursorDrawable="@null"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -96,6 +98,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/enterLocation" />
 
+        <TextView
+            android:id="@+id/enterDateTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="32dp"
+            android:text="Enter Task Date and Time:"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/LocationButton" />
+
         <Button
             android:id="@+id/timeButton"
             android:layout_width="wrap_content"
@@ -123,33 +138,57 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/enterDateTime" />
 
-        <EditText
-            android:id="@+id/editPriority"
-            android:layout_width="fill_parent"
-            android:layout_height="48dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="8dp"
-            android:hint="Task Priority"
-            android:inputType="textAutoComplete"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeButton" />
-
         <TextView
-            android:id="@+id/enterDateTime"
+            android:id="@+id/priorityText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
-            android:text="Enter Task Date and Time:"
+            android:text="Enter Task Priority:"
             android:textColor="@color/black"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/LocationButton" />
+            app:layout_constraintTop_toBottomOf="@+id/dateButton" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toTopOf="@+id/button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/priorityText">
+
+            <RadioButton
+                android:id="@+id/lowPriority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#627D98"
+                android:padding="8dp"
+                android:text="Low" />
+
+            <RadioButton
+                android:id="@+id/mediumPriority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#627D98"
+                android:padding="8dp"
+                android:text="Medium" />
+
+            <RadioButton
+                android:id="@+id/highPriority"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:buttonTint="#627D98"
+                android:padding="8dp"
+                android:text="High" />
+
+        </RadioGroup>
 
         <Button
             android:id="@+id/button"
@@ -161,8 +200,9 @@
             android:text="Create Task"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editPriority" />
+            app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

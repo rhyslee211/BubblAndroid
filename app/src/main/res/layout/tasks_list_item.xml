@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/taskName"
             android:progressDrawable="@drawable/custom_progress_bg"
-            android:max="15" />
+            android:max="100" />
 
         <RelativeLayout
             android:layout_width="wrap_content"
